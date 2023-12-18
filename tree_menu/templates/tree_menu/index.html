@@ -1,0 +1,27 @@
+{% load custom_tags %}
+<!doctype html>
+<html lang="ru">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+<link href="{% static "style.css" %}" rel="stylesheet">
+
+  </head>
+<body>
+{% if menus %}
+    <title>Главная страница</title>
+    <h3>Главная страница</h3>
+    <ul>
+        {% for menu in menus%}
+            {% if not menu.parent %}
+            <li><a href='{{ menu }}'>{{ menu }}</a></li>
+                {% draw_menu menu.name menu%}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% elif menu_name %}
+    <h3><a href={% url 'main_menu' %}>На главную страницу</a></h3>
+    {% draw_menu menu_name menu_item %}
+{% endif %}
+   </body>
+</html>
